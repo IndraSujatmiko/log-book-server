@@ -14,7 +14,11 @@ return new class extends Migration
         Schema::create('log_books', function (Blueprint $table) {
             $table->id('log_id'); // Primary Key
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // FK ke users
-            $table->foreignId('lokasi_id')->constrained('lokasis')->onDelete('cascade'); // FK ke lokasi
+            $table->unsignedBigInteger('lokasi_id');
+            $table->foreign('lokasi_id')
+                ->references('lokasi_id')
+                ->on('locations')
+                ->onDelete('cascade');
             $table->date('tanggal_kunjungan'); // Tanggal kunjungan
             $table->string('keperluan'); // Keperluan mengakses
             $table->timestamps(); // created_at & updated_at

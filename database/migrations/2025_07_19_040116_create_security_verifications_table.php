@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('security_verifications', function (Blueprint $table) {
             $table->id('verification_id'); // Primary Key
-            $table->foreignId('log_id')->constrained('log_books')->onDelete('cascade'); // FK ke log_books
+            $table->unsignedBigInteger('log_id');
+            $table->foreign('log_id')
+                ->references('log_id')
+                ->on('log_books')
+                ->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // FK ke verifikator
             $table->enum('status_verification', ['disetujui', 'ditolak', 'pending'])->default('pending');
             $table->text('catatan')->nullable();

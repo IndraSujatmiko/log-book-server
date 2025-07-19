@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('device_accesses', function (Blueprint $table) {
             $table->id('access_id'); // Primary Key
-            $table->foreignId('log_id')->constrained('log_books')->onDelete('cascade'); // FK ke log_books
+            $table->unsignedBigInteger('log_id');
+            $table->foreign('log_id')
+                ->references('log_id')
+                ->on('log_books')
+                ->onDelete('cascade');
             $table->string('nama_perangkat');
             $table->string('jenis_perangkat');
             $table->dateTime('waktu_akses');

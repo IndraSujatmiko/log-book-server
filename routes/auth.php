@@ -3,10 +3,16 @@
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use App\Livewire\Actions\Login;
+use App\Livewire\Actions\Logout;
 
 Route::middleware('guest')->group(function () {
     Volt::route('login', 'auth.login')
         ->name('login');
+
+    // TAMBAHKAN route login POST secara manual:
+    Route::post('login', Login::class)
+        ->name('login.attempt');
 
     Volt::route('register', 'auth.register')
         ->name('register');
@@ -16,7 +22,6 @@ Route::middleware('guest')->group(function () {
 
     Volt::route('reset-password/{token}', 'auth.reset-password')
         ->name('password.reset');
-
 });
 
 Route::middleware('auth')->group(function () {
@@ -29,7 +34,8 @@ Route::middleware('auth')->group(function () {
 
     Volt::route('confirm-password', 'auth.confirm-password')
         ->name('password.confirm');
-});
 
-Route::post('logout', App\Livewire\Actions\Logout::class)
-    ->name('logout');
+    // Logout untuk user yang sudah login
+    Route::post('logout', Logout::class)
+        ->name('logout');
+});

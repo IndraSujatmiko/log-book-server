@@ -40,8 +40,19 @@ new #[Layout('components.layouts.auth')] class extends Component {
         RateLimiter::clear($this->throttleKey());
         Session::regenerate();
 
-        $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+        // ✅ Tambahkan redirect berdasarkan role
+        $role = auth()->user()->role;
+
+        $redirectPath = match ($role) {
+            'admin' => '/admin/dashboard',
+            'petugas' => '/petugas/dashboard',
+            'verifikator' => '/verifikator/dashboard',
+            default => route('dashboard', absolute: false),
+        };
+
+        $this->redirectIntended(default: $redirectPath, navigate: true);
     }
+
 
     /**
      * Ensure the authentication request is not rate limited.

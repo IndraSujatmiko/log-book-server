@@ -54,11 +54,11 @@ Atau jika menggunakan PestPHP:
 | `petugas`   | Input kunjungan harian    |
 | `verifikator` | Verifikasi data kunjungan |
 
-## 📄 Lisensi
+<!-- ## 📄 Lisensi
 
 Proyek ini berada di bawah lisensi MIT. Silakan gunakan dan modifikasi sesuai kebutuhan.
 
----
+--- -->
 
 ### ✨ Kontribusi
 

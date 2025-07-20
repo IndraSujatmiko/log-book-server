@@ -21,7 +21,7 @@ test('admin user is redirected to admin dashboard', function () {
         ->set('password', 'password')
         ->call('login')
         ->assertHasNoErrors()
-        ->assertRedirect('/admin/dashboard');
+        ->assertRedirect(url('/admin/dashboard'));
 
     $this->assertAuthenticated();
 });
@@ -35,7 +35,7 @@ test('petugas user is redirected to petugas dashboard', function () {
         ->set('password', 'password')
         ->call('login')
         ->assertHasNoErrors()
-        ->assertRedirect('/petugas/dashboard');
+        ->assertRedirect(url('/petugas/dashboard'));
 
     $this->assertAuthenticated();
 });
@@ -49,7 +49,7 @@ test('verifikator user is redirected to verifikator dashboard', function () {
         ->set('password', 'password')
         ->call('login')
         ->assertHasNoErrors()
-        ->assertRedirect('/verifikator/dashboard');
+        ->assertRedirect(url('/verifikator/dashboard'));
 
     $this->assertAuthenticated();
 });
@@ -75,6 +75,6 @@ test('users can logout', function () {
     ->actingAs($user)
     ->post('/logout');
     $response
-    ->assertRedirect('/');
+    ->assertRedirect(url('/'));
     $this->assertGuest();
 });

@@ -17,6 +17,11 @@
                 </flux:navlist.group>
             </flux:navlist>
 
+            <flux:navlist.item icon="calendar-days" :href="route('admin.rekap')" :current="request()->routeIs('admin.rekap')" wire:navigate>
+                Rekap Kunjungan
+            </flux:navlist.item>
+
+
             <flux:spacer />
 
             <flux:navlist variant="outline">

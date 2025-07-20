@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
+use App\Http\Controllers\Admin\DashboardController;
+
+
 Route::get('/', function () {
     return view('welcome');
 })->middleware('redirect.if.auth')->name('home');
@@ -21,9 +24,11 @@ Route::middleware(['auth'])->group(function () {
 
 // 🔐 Role-based dashboard access
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return 'Halaman Admin';
-    });
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::view('/admin/rekap', 'admin.rekap')->name('admin.rekap');
+    Route::view('/devices', 'admin.devices')->name('devices');
+    Route::view('/settings', 'admin.settings')->name('settings');
+    Route::view('/help', 'admin.help')->name('help');
 });
 
 Route::middleware(['auth', 'role:petugas'])->group(function () {

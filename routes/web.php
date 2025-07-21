@@ -4,6 +4,13 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\RekapController;
+use App\Http\Controllers\Admin\DeviceController;
+use App\Http\Controllers\Admin\AdministrationController;
+use App\Http\Controllers\Admin\HelpController;
+use App\Http\Controllers\Petugas\DashboardController as PetugasDashboardController;
+use App\Http\Controllers\Petugas\RekapController as PetugasRekapController;
+
 
 
 Route::get('/', function () {
@@ -23,18 +30,17 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // 🔐 Role-based dashboard access
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::view('/admin/rekap', 'admin.rekap')->name('admin.rekap');
-    Route::view('/devices', 'admin.devices')->name('devices');
-    Route::view('/settings', 'admin.settings')->name('settings');
-    Route::view('/help', 'admin.help')->name('help');
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/rekap', [RekapController::class, 'index'])->name('rekap');    
+    Route::get('/devices', [DeviceController::class, 'index'])->name('devices');
+    Route::get('/administration', [AdministrationController::class, 'index'])->name('administration');
+    Route::get('/help', [HelpController::class, 'index'])->name('help');
 });
 
-Route::middleware(['auth', 'role:petugas'])->group(function () {
-    Route::get('/petugas/dashboard', function () {
-        return 'Halaman Petugas';
-    });
+Route::middleware(['auth', 'role:petugas'])->prefix('petugas')->name('petugas.')->group(function () {
+    Route::get('/dashboard', [PetugasDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/rekap', [PetugasRekapController::class, 'index'])->name('rekap');
 });
 
 Route::middleware(['auth', 'role:verifikator'])->group(function () {

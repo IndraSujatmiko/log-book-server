@@ -21,6 +21,19 @@
                 Rekap Kunjungan
             </flux:navlist.item>
 
+            <flux:navlist.item icon="computer-desktop" :href="route('admin.devices')" :current="request()->routeIs('admin.devices')" wire:navigate>
+                List Device
+            </flux:navlist.item>
+
+            <flux:navlist.item icon="cog-6-tooth" :href="route('admin.administration')" :current="request()->routeIs('admin.administration')" wire:navigate>
+                Administration
+            </flux:navlist.item>
+
+            <flux:navlist.item icon="lifebuoy" :href="route('admin.help')" :current="request()->routeIs('admin.help')" wire:navigate>
+                Help
+            </flux:navlist.item>
+
+
 
             <flux:spacer />
 

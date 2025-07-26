@@ -19,7 +19,6 @@ class RedirectIfAuthenticatedByRole
             return redirect(match ($role) {
                 'admin' => '/admin/dashboard',
                 'petugas' => '/petugas/dashboard',
-                'verifikator' => '/verifikator/dashboard',
                 default => '/dashboard',
             });
         }

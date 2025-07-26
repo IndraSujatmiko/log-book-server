@@ -24,7 +24,6 @@ class Login
         return redirect()->to(match (Auth::user()->role) {
             'admin' => '/admin/dashboard',
             'petugas' => '/petugas/dashboard',
-            'verifikator' => '/verifikator/dashboard',
             default => '/dashboard',
         });
     }

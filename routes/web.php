@@ -43,10 +43,5 @@ Route::middleware(['auth', 'role:petugas'])->prefix('petugas')->name('petugas.')
     Route::get('/rekap', [PetugasRekapController::class, 'index'])->name('rekap');
 });
 
-Route::middleware(['auth', 'role:verifikator'])->group(function () {
-    Route::get('/verifikator/dashboard', function () {
-        return 'Halaman Verifikator';
-    });
-});
 
 require __DIR__.'/auth.php';

@@ -5,8 +5,8 @@ Sebuah aplikasi web berbasis Laravel + Livewire Volt untuk mencatat, mengelola, 
 
 ## 🚀 Fitur Utama
 
-- Login dan registrasi berbasis role
-- Dashboard khusus untuk masing-masing role
+- Login dan registrasi berbasis role (sudah)
+- Dashboard khusus untuk masing-masing role (sudah)
 - Rekap kunjungan harian/mingguan/bulanan
 - Manajemen perangkat (opsional)
 - Sistem verifikasi kunjungan
@@ -52,7 +52,6 @@ Atau jika menggunakan PestPHP:
 |-------------|---------------------------|
 | `admin`     | Dashboard, Rekap, Admin   |
 | `petugas`   | Input kunjungan harian    |
-| `verifikator` | Verifikasi data kunjungan |
 
 <!-- ## 📄 Lisensi
 

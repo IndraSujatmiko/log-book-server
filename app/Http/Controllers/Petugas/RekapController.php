@@ -9,6 +9,6 @@ class RekapController extends Controller
 {
     public function index()
     {
-        return view('petugas.rekap');
+        return view('petugas.rekap.index');
     }
 }

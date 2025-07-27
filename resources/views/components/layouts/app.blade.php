@@ -4,11 +4,15 @@
     @include('partials.head')
 </head>
 <body class="min-h-screen bg-white dark:bg-zinc-800">
-    <x-layouts.app.sidebar :role="auth()->user()->role" :title="$title ?? null" />
+    <div class="flex flex-col lg:flex-row min-h-screen">
+        <!-- Sidebar -->
+        <x-layouts.app.sidebar :role="auth()->user()->role" :title="$title ?? null" />
 
-    <main class="p-4">
-        {{ $slot }}
-    </main>
+        <!-- Main Content -->
+        <main class="flex-1 p-4">
+            {{ $slot }}
+        </main>
+    </div>
 
     @fluxScripts
 </body>

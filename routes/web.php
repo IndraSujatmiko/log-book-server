@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/rekap', [RekapController::class, 'index'])->name('rekap');    
-    Route::get('/devices', [DeviceController::class, 'index'])->name('devices');
+    Route::resource('/devices', DeviceController::class)->names('devices');
     Route::get('/administration', [AdministrationController::class, 'index'])->name('administration');
     Route::get('/help', [HelpController::class, 'index'])->name('help');
 });

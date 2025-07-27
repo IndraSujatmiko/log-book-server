@@ -27,7 +27,7 @@
                 Rekap Kunjungan
             </flux:navlist.item>
 
-            <flux:navlist.item icon="computer-desktop" :href="route('admin.devices')" :current="request()->routeIs('admin.devices')" wire:navigate>
+            <flux:navlist.item icon="computer-desktop" :href="route('admin.devices.index')" :current="request()->routeIs('admin.devices.index')" wire:navigate>
                 List Device
             </flux:navlist.item>
 

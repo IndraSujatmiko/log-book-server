@@ -6,28 +6,30 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('device_accesses', function (Blueprint $table) {
             $table->id('access_id'); // Primary Key
+
+            // Relasi ke log_books
             $table->unsignedBigInteger('log_id');
             $table->foreign('log_id')
                 ->references('log_id')
                 ->on('log_books')
                 ->onDelete('cascade');
-            $table->string('nama_perangkat');
-            $table->string('jenis_perangkat');
+
+            // Relasi ke devices
+            $table->unsignedBigInteger('device_id');
+            $table->foreign('device_id')
+                ->references('id')
+                ->on('devices')
+                ->onDelete('cascade');
+
             $table->dateTime('waktu_akses');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('device_accesses');

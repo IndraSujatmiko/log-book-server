@@ -21,9 +21,9 @@
                         <th class="px-4 py-3 border-b text-center dark:border-zinc-600">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="text-sm text-zinc-800 dark:text-zinc-100 divide-y divide-zinc-200 dark:divide-zinc-700">
+                <tbody class="bg-white divide-y divide-gray-200 dark:bg-zinc-800 dark:divide-gray-700">
                     @forelse($devices as $index => $device)
-                        <tr class="hover:bg-zinc-50 dark:hover:bg-zinc-700">
+                        <tr>
                             <td class="px-4 py-3">{{ $index + 1 }}</td>
                             <td class="px-4 py-3">{{ $device->name }}</td>
                             <td class="px-4 py-3">{{ $device->type }}</td>
@@ -63,7 +63,7 @@
                         <th class="px-4 py-3">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="text-sm text-zinc-800 dark:text-zinc-100 divide-y divide-zinc-200 dark:divide-zinc-700">
+                <tbody class="bg-white divide-y divide-gray-200 dark:bg-zinc-800 dark:divide-gray-700">
                     @forelse ($deviceAccesses as $access)
                         <tr class="hover:bg-zinc-50 dark:hover:bg-zinc-700">
                             <td class="px-4 py-3">{{ $loop->iteration }}</td>

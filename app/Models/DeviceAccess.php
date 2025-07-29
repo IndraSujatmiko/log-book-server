@@ -23,4 +23,9 @@ class DeviceAccess extends Model
     {
         return $this->belongsTo(LogBook::class, 'log_id');
     }
+
+    public function device()
+    {
+        return $this->belongsTo(Device::class);
+    }
 }

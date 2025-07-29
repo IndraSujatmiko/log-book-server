@@ -15,4 +15,10 @@ class Device extends Model
         'serial_number',
         'description',
     ];
+
+    public function accesses()
+    {
+        return $this->hasMany(DeviceAccess::class);
+    }
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Device;
+use App\Models\DeviceAccess;
 use Illuminate\Http\Request;
 
 class DeviceController extends Controller
@@ -13,8 +14,14 @@ class DeviceController extends Controller
      */
     public function index()
     {
+        // Mengambil semua data device untuk tabel pertama
         $devices = Device::all();
-        return view('admin.devices.index', compact('devices'));
+
+        // Mengambil data akses perangkat beserta relasi ke data device
+        $deviceAccesses = DeviceAccess::with('device')->latest()->get();
+
+        // Mengirim kedua data ke view
+        return view('admin.devices.index', compact('devices', 'deviceAccesses'));
     }
 
     /**

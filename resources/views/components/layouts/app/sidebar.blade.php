@@ -15,13 +15,13 @@
                 $role = auth()->user()->role;
             @endphp
 
-            <flux:navlist variant="outline">
-                <flux:navlist.group :heading="__('Platform')" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                </flux:navlist.group>
-            </flux:navlist>
             
             @if ($role === 'admin')
+            <flux:navlist variant="outline">
+                <flux:navlist.group :heading="__('Platform')" class="grid">
+                    <flux:navlist.item icon="home" :href="route('admin.dashboard')" :current="request()->routeIs('admin.dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                </flux:navlist.group>
+            </flux:navlist>
 
             <flux:navlist.item icon="calendar-days" :href="route('admin.rekap')" :current="request()->routeIs('admin.rekap')" wire:navigate>
                 Rekap Kunjungan

@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('devices', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+            $table->id('device_id'); // Sesuaikan dengan yang digunakan di form
+            $table->string('nama_device'); // Sesuaikan dengan yang ditampilkan di form
             $table->string('type')->nullable();
             $table->string('serial_number')->unique()->nullable();
             $table->text('description')->nullable();

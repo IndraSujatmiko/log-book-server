@@ -9,23 +9,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('device_accesses', function (Blueprint $table) {
-            $table->id('access_id'); // Primary Key
-
-            // Relasi ke log_books
-            $table->unsignedBigInteger('log_id');
-            $table->foreign('log_id')
-                ->references('log_id')
-                ->on('log_books')
-                ->onDelete('cascade');
-
-            // Relasi ke devices
-            $table->unsignedBigInteger('device_id');
-            $table->foreign('device_id')
-                ->references('id')
-                ->on('devices')
-                ->onDelete('cascade');
-
-            $table->dateTime('waktu_akses');
+            $table->id();
+            $table->foreignId('log_id')->constrained('log_books', 'log_id')->onDelete('cascade');
+            $table->foreignId('device_id')->constrained('devices', 'device_id')->onDelete('cascade');
+            $table->timestamp('waktu_akses');
             $table->timestamps();
         });
     }

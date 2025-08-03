@@ -9,8 +9,10 @@ class Device extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'device_id';
+
     protected $fillable = [
-        'name',
+        'nama_device',
         'type',
         'serial_number',
         'description',
@@ -18,7 +20,6 @@ class Device extends Model
 
     public function accesses()
     {
-        return $this->hasMany(DeviceAccess::class);
+        return $this->hasMany(DeviceAccess::class, 'device_id');
     }
-
 }

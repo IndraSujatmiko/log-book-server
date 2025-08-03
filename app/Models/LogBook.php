@@ -18,6 +18,14 @@ class LogBook extends Model
         'lokasi_id',
         'tanggal_kunjungan',
         'keperluan',
+        'waktu_masuk',
+        'waktu_keluar', // Tambahan!
+    ];
+
+    protected $casts = [
+        'tanggal_kunjungan' => 'date',
+        'waktu_masuk' => 'datetime',
+        'waktu_keluar' => 'datetime',
     ];
 
     // Relasi ke user yang menginput log (admin/petugas)

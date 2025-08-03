@@ -13,9 +13,8 @@ class DeviceAccess extends Model
 
     protected $fillable = [
         'log_id',
-        'nama_perangkat',
-        'jenis_perangkat',
-        'waktu_akses',
+        'device_id',
+        'waktu_akses'
     ];
 
     // Relasi: akses perangkat dimiliki oleh satu log
@@ -26,6 +25,6 @@ class DeviceAccess extends Model
 
     public function device()
     {
-        return $this->belongsTo(Device::class);
+        return $this->belongsTo(Device::class, 'device_id');
     }
 }

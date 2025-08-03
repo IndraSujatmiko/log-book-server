@@ -25,14 +25,19 @@ class LogBookController extends Controller
 
         $validated['input_by'] = auth()->id();
 
+        // Simpan data log book
         $log = LogBook::create($validated);
 
-        // Simpan ke pivot table
-        $log->deviceAccesses()->createMany(
-            collect($validated['device_diakses'])->map(fn($id) => ['device_id' => $id])->toArray()
-        );
+        // Attach device ke pivot table device_accesses
+        foreach ($validated['device_diakses'] as $deviceId) {
+            $log->deviceAccesses()->create([
+                'device_id' => $deviceId,
+                'waktu_akses' => now(),
+            ]);
+        }
 
         return redirect()->route('admin.dashboard')->with('success', 'Data kunjungan berhasil disimpan.');
     }
+
 
 }

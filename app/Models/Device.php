@@ -22,4 +22,14 @@ class Device extends Model
     {
         return $this->hasMany(DeviceAccess::class, 'device_id');
     }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'device_id';
+    }
 }

@@ -27,8 +27,12 @@
                 Rekap Kunjungan
             </flux:navlist.item>
 
-            <flux:navlist.item icon="computer-desktop" :href="route('admin.devices.index')" :current="request()->routeIs('admin.devices.index')" wire:navigate>
+            <flux:navlist.item icon="computer-desktop" :href="route('admin.devices.index')" :current="request()->routeIs('admin.devices.*')" wire:navigate>
                 List Device
+            </flux:navlist.item>
+
+            <flux:navlist.item icon="server-stack" :href="route('admin.locations.index')" :current="request()->routeIs('admin.locations.*')" wire:navigate>
+                Lokasi Server
             </flux:navlist.item>
 
             <flux:navlist.item icon="cog-6-tooth" :href="route('admin.administration')" :current="request()->routeIs('admin.administration')" wire:navigate>

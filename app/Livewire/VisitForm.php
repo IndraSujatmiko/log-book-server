@@ -27,7 +27,7 @@ class VisitForm extends Component
         'asal_pengunjung' => 'required|string|max:255',
         'keperluan' => 'required|string',
         'lokasi_id' => 'required|exists:locations,lokasi_id',
-        'device_diakses' => 'required|array|min:1',
+        'device_diakses' => 'sometimes|required|array|min:1',
         'device_diakses.*' => 'exists:devices,device_id',
         'tanggal_kunjungan' => 'required|date',
         'waktu_masuk' => 'required',
@@ -104,7 +104,11 @@ class VisitForm extends Component
         return view('livewire.visit-form', [
             'locations' => Location::all(),
             'devices' => Device::all(),
-            'logBooks' => LogBook::with(['location', 'deviceAccesses.device', 'inputBy'])
+            // Hanya tampilkan logbook yang sudah disetujui
+            'logBooks' => LogBook::with(['location', 'deviceAccesses.device', 'inputBy', 'verification'])
+                ->whereHas('verification', function ($query) {
+                    $query->where('status_verification', 'disetujui');
+                })
                 ->orderBy('tanggal_kunjungan', 'desc')
                 ->orderBy('waktu_masuk', 'desc')
                 ->paginate(10),

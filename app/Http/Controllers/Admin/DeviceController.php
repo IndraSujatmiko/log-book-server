@@ -39,7 +39,7 @@ class DeviceController extends Controller
     {
         // Validasi input
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'nama_device' => 'required|string|max:255',
             'type' => 'required|string|max:255',
             'serial_number' => 'required|string|max:255|unique:devices,serial_number',
             'description' => 'nullable|string',
@@ -73,9 +73,9 @@ class DeviceController extends Controller
     public function update(Request $request, Device $device)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'type' => 'required|string|max:100',
-            'serial_number' => 'required|string|max:100|unique:devices,serial_number,' . $device->id,
+            'nama_device' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            'serial_number' => 'required|string|max:255|unique:devices,serial_number,' . $device->device_id,
             'description' => 'nullable|string',
         ]);
 

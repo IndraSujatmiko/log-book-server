@@ -6,8 +6,8 @@
             @csrf
 
             <div>
-                <label for="name" class="block text-sm font-medium text-zinc-700 dark:text-zinc-200">Nama Device</label>
-                <input type="text" id="name" name="name" required
+                <label for="nama_device" class="block text-sm font-medium text-zinc-700 dark:text-zinc-200">Nama Device</label>
+                <input type="text" id="nama_device" name="nama_device" required
                     class="w-full mt-1 px-3 py-2 border rounded dark:bg-zinc-900 dark:text-white dark:border-zinc-700" />
             </div>
 

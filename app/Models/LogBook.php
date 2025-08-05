@@ -51,4 +51,14 @@ class LogBook extends Model
     {
         return $this->hasOne(SecurityVerification::class, 'log_id');
     }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'log_id';
+    }
 }

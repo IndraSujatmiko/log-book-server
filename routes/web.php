@@ -6,6 +6,7 @@ use Livewire\Volt\Volt;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RekapController;
 use App\Http\Controllers\Admin\DeviceController;
+use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\AdministrationController;
 use App\Http\Controllers\Admin\HelpController;
 use App\Http\Controllers\Petugas\DashboardController as PetugasDashboardController;
@@ -45,8 +46,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/rekap', [RekapController::class, 'index'])->name('rekap');    
     Route::resource('/devices', DeviceController::class)->names('devices');
+    Route::resource('/locations', LocationController::class)->names('locations');
+    Route::delete('/devices/access/{deviceAccess}', [DeviceController::class, 'destroyAccess'])->name('devices.access.destroy');
     Route::resource('/logbook', LogBookController::class)->names('logbook'); // <--- ini penting!
     Route::get('/administration', [AdministrationController::class, 'index'])->name('administration');
+    Route::post('/administration/logbook/{logBook}/status', [AdministrationController::class, 'updateStatus'])->name('administration.status.update');
     Route::get('/help', [HelpController::class, 'index'])->name('help');
 });
 

@@ -25,13 +25,13 @@
                     @forelse($devices as $index => $device)
                         <tr>
                             <td class="px-4 py-3">{{ $index + 1 }}</td>
-                            <td class="px-4 py-3">{{ $device->name }}</td>
+                            <td class="px-4 py-3">{{ $device->nama_device }}</td>
                             <td class="px-4 py-3">{{ $device->type }}</td>
                             <td class="px-4 py-3">{{ $device->serial_number }}</td>
                             <td class="px-4 py-3">{{ $device->description }}</td>
                             <td class="px-4 py-3 text-center space-x-3">
-                                <a href="{{ route('admin.devices.edit', $device->id) }}" class="text-blue-600 hover:underline">Edit</a>
-                                <form action="{{ route('admin.devices.destroy', $device->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus?')">
+                                <a href="{{ route('admin.devices.edit', $device->device_id) }}" class="text-blue-600 hover:underline">Edit</a>
+                                <form action="{{ route('admin.devices.destroy', $device->device_id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-600 hover:underline">Hapus</button>
@@ -67,11 +67,15 @@
                     @forelse ($deviceAccesses as $access)
                         <tr class="hover:bg-zinc-50 dark:hover:bg-zinc-700">
                             <td class="px-4 py-3">{{ $loop->iteration }}</td>
-                            <td class="px-4 py-3">{{ $access->device->name ?? '-' }}</td>
+                            <td class="px-4 py-3">{{ $access->device->nama_device ?? '-' }}</td>
                             <td class="px-4 py-3">{{ $access->device->type ?? '-' }}</td>
                             <td class="px-4 py-3">{{ $access->waktu_akses }}</td>
-                            <td class="px-4 py-3">
-                                <button class="text-red-600 hover:underline">Hapus</button>
+                            <td class="px-4 py-3 text-center">
+                                <form action="{{ route('admin.devices.access.destroy', $access->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus data akses ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:underline">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                     @empty

@@ -21,4 +21,14 @@ class Location extends Model
     {
         return $this->hasMany(LogBook::class, 'lokasi_id');
     }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'lokasi_id';
+    }
 }

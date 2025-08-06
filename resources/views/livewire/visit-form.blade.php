@@ -1,4 +1,8 @@
 <div>
+    <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+      <span class="font-medium">Waktu Server Saat Ini (now()):</span> {{ now()->toDateTimeString() }} (Timezone: {{ config('app.timezone') }})
+    </div>
+
     @if (session()->has('success'))
         <div class="mb-4 p-4 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-200 rounded-lg">
             {{ session('success') }}
@@ -84,13 +88,9 @@
 
         <!-- Tombol Aksi -->
         <div class="col-span-3 flex justify-end gap-3 mt-4">
-            <button type="button" wire:click="clear"
+            <button type="button" onclick="window.location.reload()"
                 class="px-4 py-2 bg-gray-100 dark:bg-zinc-600 text-gray-800 dark:text-white rounded hover:bg-gray-200 dark:hover:bg-zinc-500 transition">
                 Clear
-            </button>
-            <button type="button" onclick="window.location.reload()"
-                class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition">
-                Cancel
             </button>
             <button type="submit"
                 class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition flex items-center">
@@ -129,11 +129,22 @@
                             {{ $log->nama_pengunjung }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
-                                {{ now()->between($log->waktu_masuk, $log->waktu_keluar) 
-                                    ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
-                                    : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200' }}">
-                                {{ now()->between($log->waktu_masuk, $log->waktu_keluar) ? 'Active' : 'Completed' }}
+                            @php
+                                $status = '';
+                                $statusClass = '';
+                                if (now()->between($log->waktu_masuk, $log->waktu_keluar)) {
+                                    $status = 'Active';
+                                    $statusClass = 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
+                                } elseif (now()->gt($log->waktu_keluar)) {
+                                    $status = 'Completed';
+                                    $statusClass = 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200';
+                                } else {
+                                    $status = 'Disetujui';
+                                    $statusClass = 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
+                                }
+                            @endphp
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $statusClass }}">
+                                {{ $status }}
                             </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
@@ -143,10 +154,10 @@
                             {{ $log->tanggal_kunjungan->format('d/m/Y') }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                            {{ $log->waktu_masuk }}
+                            {{ $log->waktu_masuk->format('H:i:s') }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                            {{ $log->waktu_keluar }}
+                            {{ $log->waktu_keluar->format('H:i:s') }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
                             {{ $log->location->nama_lokasi }}

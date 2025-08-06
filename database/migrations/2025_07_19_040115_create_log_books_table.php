@@ -31,8 +31,8 @@ return new class extends Migration
             $table->date('tanggal_kunjungan');
             $table->string('keperluan');
 
-            $table->time('waktu_masuk')->nullable();
-            $table->time('waktu_keluar')->nullable();
+            $table->datetime('waktu_masuk')->nullable();
+            $table->datetime('waktu_keluar')->nullable();
 
 
             $table->timestamps(); // created_at & updated_at

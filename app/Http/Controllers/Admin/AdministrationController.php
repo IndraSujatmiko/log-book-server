@@ -45,6 +45,6 @@ class AdministrationController extends Controller
             'tgl_verification' => now(),
         ]);
 
-        return redirect()->route('admin.administration.index')->with('success', 'Status kunjungan berhasil diperbarui.');
+        return redirect()->route('admin.administration')->with('success', 'Status kunjungan berhasil diperbarui.');
     }
 }

@@ -89,6 +89,14 @@ class VisitForm extends Component
         }
     }
 
+    public function clear()
+    {
+        $this->reset(['nama_pengunjung', 'asal_pengunjung', 'keperluan', 'device_diakses', 'lokasi_id']);
+        $this->mount();
+        $this->resetValidation();
+        $this->resetPage();
+    }
+
     public function updatedLokasi($value)
     {
         \Log::info('Lokasi updated:', ['value' => $value]);
